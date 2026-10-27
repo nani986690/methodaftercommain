@@ -1437,5 +1437,243 @@ min-width:700px;
 
 }
 /*==================================================
+ENROLLMENT PACKETS (FILLABLE FORMS)
+==================================================*/
+.enrollment-packets-wrapper{
+    margin-top:70px;
+}
+
+.packets-header{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto 40px;
+}
+
+.packets-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#E8EDF5;
+    color:#0A2348;
+    font-size:13px;
+    font-weight:700;
+    padding:6px 18px;
+    border-radius:50px;
+    letter-spacing:1px;
+    margin-bottom:15px;
+}
+
+.packets-title{
+    font-size:2.2rem;
+    color:#0A2348;
+    font-weight:700;
+    margin-bottom:14px;
+}
+
+.packets-subtitle{
+    font-size:16px;
+    color:#4A6B8A;
+    line-height:1.7;
+    margin:0 auto;
+}
+
+.packets-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.packet-card{
+    background:#fff;
+    border:1px solid #D6E0EC;
+    border-radius:24px;
+    padding:38px 32px;
+    box-shadow:0 20px 60px rgba(0,0,0,.06);
+    display:flex;
+    flex-direction:column;
+    transition:.35s ease;
+    position:relative;
+}
+
+.packet-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 25px 70px rgba(10,35,72,.14);
+    border-color:#4A6B8A;
+}
+
+.packet-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.packet-icon{
+    width:62px;
+    height:62px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#E8EDF5,#D6E0EC);
+    color:#0A2348;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+}
+
+.packet-tags{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:flex-end;
+}
+
+.tag-age{
+    background:#0A2348;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    padding:5px 12px;
+    border-radius:30px;
+}
+
+.tag-status{
+    background:#EAF7EE;
+    color:#1E7E34;
+    font-size:12px;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:30px;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+}
+
+.packet-card h4{
+    font-size:22px;
+    color:#0A2348;
+    margin-bottom:8px;
+}
+
+.packet-classrooms{
+    font-size:14px;
+    color:#4A6B8A;
+    margin-bottom:14px;
+    padding-bottom:12px;
+    border-bottom:1px dashed #D6E0EC;
+}
+
+.packet-classrooms strong{
+    color:#0A2348;
+}
+
+.packet-desc{
+    font-size:15px;
+    color:#4A6B8A;
+    line-height:1.7;
+    margin-bottom:28px;
+    flex-grow:1;
+}
+
+.packet-actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.btn-download{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:15px 26px;
+    background:#0A2348;
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+    border-radius:50px;
+    text-decoration:none;
+    transition:.3s ease;
+    box-shadow:0 12px 28px rgba(10,35,72,.22);
+}
+
+.btn-download:hover{
+    background:#16335F;
+    transform:translateY(-2px);
+    box-shadow:0 16px 34px rgba(10,35,72,.30);
+    color:#fff;
+}
+
+.btn-preview{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 20px;
+    background:transparent;
+    color:#4A6B8A;
+    font-size:14px;
+    font-weight:500;
+    border-radius:50px;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.btn-preview:hover{
+    color:#0A2348;
+    text-decoration:underline;
+}
+
+.packet-notice{
+    margin-top:35px;
+    background:#fff;
+    border:1px solid #D6E0EC;
+    border-left:5px solid #0A2348;
+    border-radius:18px;
+    padding:22px 26px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+
+.packet-notice i{
+    font-size:24px;
+    color:#0A2348;
+    margin-top:3px;
+}
+
+.packet-notice strong{
+    color:#0A2348;
+    display:block;
+    margin-bottom:4px;
+    font-size:16px;
+}
+
+.packet-notice span{
+    color:#4A6B8A;
+    font-size:14.5px;
+    line-height:1.6;
+}
+
+.packet-notice a{
+    color:#0A2348;
+    font-weight:600;
+    text-decoration:underline;
+}
+
+@media(max-width:768px){
+    .packet-card{
+        padding:28px 20px;
+    }
+    .packets-title{
+        font-size:1.75rem;
+    }
+    .packet-notice{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+
+/*==================================================
 END
 ==================================================*/
