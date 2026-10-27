@@ -465,18 +465,27 @@ HERO
 
 .hero-right {
   position: relative;
-  margin-top: -450px;
-  /* Adjust this negative value as needed to pull it higher */
+  margin-top: -380px;
+  /* Negative margin ni konchem reduce chesa so image kinda ki jaruguthundi */
+  width: 100%;
 }
 
 .hero-right img {
+  width: 100%;
+  max-width: 950px;
+  /* Width ni inka gattiga penchanu (950px) */
+  height: auto;
   border-radius: 30px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
+  /* Shadow ni inka rich ga pettanu */
+  transform: scale(1.1);
+  /* Scale tho image ni overall ga 10% peddaga chesthundi */
+  transform-origin: center;
   transition: .5s;
 }
 
 .hero-right img:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.13);
 }
 
 /*==================================================
@@ -2427,4 +2436,18 @@ main {
   /* Adjust this negative value as needed to reduce the gap */
   z-index: 10;
   /* Ensures it stays properly layered above or alongside the header background */
+}
+
+/* Desktop / Larger Screens kosam unna Media Query lo idi pettandi */
+@media (min-width: 992px) {
+  .hero-right {
+    max-width: 100% !important;
+  }
+
+  .hero-right img {
+    max-width: 850px !important;
+    /* Desktop lo image size inka peddaga kanipinchedaniki idi penchandi */
+    width: 100% !important;
+    height: auto !important;
+  }
 }
