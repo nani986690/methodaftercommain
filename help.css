@@ -610,6 +610,90 @@ VOLUNTEER
     gap:18px;
     flex-wrap:wrap;
 }
+
+/*=====================================
+VOLUNTEER OPPORTUNITIES (MOVED FROM PARENTS)
+======================================*/
+
+.volunteer{
+    padding:100px 0;
+    background:#fff;
+}
+
+.volunteer-opportunities-block{
+    margin-top:80px;
+    padding-top:60px;
+    border-top:1px solid #D6E0EC;
+}
+
+.volunteer-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin-bottom:60px;
+}
+
+.volunteer-card{
+    background:#fff;
+    padding:35px;
+    text-align:center;
+    border-radius:22px;
+    border:1px solid #D6E0EC;
+    box-shadow:0 12px 35px rgba(10,35,72,.05);
+    transition:.35s;
+}
+
+.volunteer-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 60px rgba(10,35,72,.14);
+}
+
+.volunteer-icon{
+    width:78px;
+    height:78px;
+    margin:0 auto 24px;
+    border-radius:20px;
+    background:#E8EDF5;
+    color:#0A2348;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+}
+
+.volunteer-card h3{
+    color:#0A2348;
+    margin-bottom:15px;
+    font-size:1.35rem;
+}
+
+.volunteer-card p{
+    color:#4A6B8A;
+    line-height:1.8;
+}
+
+.volunteer-note{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    background:linear-gradient(135deg,#0A2348,#4A6B8A);
+    color:#fff;
+    padding:55px;
+    border-radius:28px;
+    box-shadow:0 25px 60px rgba(10,35,72,.25);
+}
+
+.volunteer-note h3{
+    font-size:2rem;
+    margin-bottom:18px;
+    color:#fff;
+}
+
+.volunteer-note p{
+    line-height:1.9;
+    opacity:.95;
+    color:#fff;
+}
 /*=====================================
 COMMUNITY IMPACT
 ======================================*/
@@ -746,6 +830,10 @@ RESPONSIVE
     grid-template-columns:1fr;
 }
 
+.volunteer-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
 .floating-card{
     position:static;
     margin-top:25px;
@@ -792,6 +880,14 @@ RESPONSIVE
 .options-grid,
 .impact-grid{
     grid-template-columns:1fr;
+}
+
+.volunteer-grid{
+    grid-template-columns:1fr;
+}
+
+.volunteer-note{
+    padding:35px 25px;
 }
 
 .hero-buttons,

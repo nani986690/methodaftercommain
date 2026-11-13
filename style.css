@@ -1287,6 +1287,12 @@ CTA SECTION
 
 }
 
+.cta .btn-primary {
+
+  border: 2px solid #fff;
+
+}
+
 .cta .btn-secondary {
 
   background: #fff;
