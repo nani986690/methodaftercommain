@@ -60,11 +60,11 @@ HEADER
 
       </nav>
 
-      <div class="menu-btn">
+      <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false">
 
         <i class="fa-solid fa-bars"></i>
 
-      </div>
+      </button>
 
     </div>
 
@@ -78,41 +78,55 @@ HERO
 
     <div class="container">
 
-      <div class="contact-hero-content">
+      <div class="contact-hero-grid">
 
-        <span class="hero-tag">
+        <div class="contact-hero-left">
 
-          GET IN TOUCH
+          <span class="hero-tag">
 
-        </span>
+            GET IN TOUCH
 
-        <h1>
+          </span>
 
-          We'd Love To Hear From You
+          <h1>
 
-        </h1>
+            We'd Love To Hear From You
 
-        <p>
+          </h1>
 
-          Whether you're looking for quality child care, have questions
-          about enrollment, or would like to schedule a tour, our team is
-          here to help every step of the way.
+          <p>
 
-        </p>
+            Whether you're looking for quality child care, have questions
+            about enrollment, or would like to schedule a tour, our team is
+            here to help every step of the way.
 
-        <div class="hero-buttons">
+          </p>
 
-          <a href="#contact-form" class="btn-primary">
+          <div class="hero-buttons">
 
-            Send A Message
+            <a href="#contact-form" class="btn-primary">
 
-          </a>
+              Send A Message
 
-          <a href="tel:+19198524568" class="btn-secondary">
+            </a>
 
-            Call Us
+            <a href="tel:+19198524568" class="btn-secondary">
 
-          </a>
+              Call Us
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="contact-hero-right">
+
+          <div class="hero-image">
+
+            <img src="assets/g6.jpg" alt="Method Child Development Center">
+
+          </div>
 
         </div>
 
@@ -483,7 +497,7 @@ CONTACT FORM
 
                 </label>
 
-                <input type="tel" placeholder="(123) 456-7890" required>
+                <input type="tel" placeholder="(123) 456-7890">
 
               </div>
 
@@ -525,7 +539,7 @@ CONTACT FORM
 
               </label>
 
-              <textarea rows="6" placeholder="Tell us about your inquiry..."></textarea>
+              <textarea rows="6" placeholder="Tell us about your inquiry..." required></textarea>
 
             </div>
 
@@ -764,6 +778,8 @@ FOOTER
           &copy; 2026 Method Child Development Center. All Rights Reserved.
 
         </p>
+
+        <p class="developer-credit">Website designed &amp; developed by Nivinex Agency</p>
 
       </div>
 

@@ -631,26 +631,29 @@ CTA
 }
 
 .cta-card .btn-primary{
-    background:#fff !important;
-    color:#0A2348 !important;
-    border:2px solid #fff !important;
+    background:#0A2348 !important;
+    color:#ffffff !important;
+    border:2px solid #ffffff !important;
+    font-weight:700 !important;
 }
 
 .cta-card .btn-primary:hover{
-    background:#E8EDF5 !important;
-    color:#0A2348 !important;
+    background:#16335F !important;
+    color:#ffffff !important;
     transform:translateY(-2px);
 }
 
 .cta-card .btn-secondary{
-    background:transparent !important;
-    border:2px solid #fff !important;
-    color:#fff !important;
+    background:#ffffff !important;
+    color:#0A2348 !important;
+    border:2px solid #ffffff !important;
+    font-weight:700 !important;
 }
 
 .cta-card .btn-secondary:hover{
-    background:#fff !important;
+    background:#E8EDF5 !important;
     color:#0A2348 !important;
+    border-color:#E8EDF5 !important;
     transform:translateY(-2px);
 }
 
@@ -985,9 +988,10 @@ RESPONSIVE
     margin-top: 6px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
     .leadership-team {
         grid-template-columns: 1fr;
+        gap: 24px;
     }
     .staff-highlight {
         grid-template-columns: 1fr;
@@ -1002,7 +1006,7 @@ RESPONSIVE
 
 @media (max-width: 768px) {
     .leader-card {
-        padding: 26px 20px;
+        padding: 24px 18px;
     }
     .leader-header {
         flex-direction: column;

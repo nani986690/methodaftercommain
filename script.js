@@ -7,12 +7,18 @@ const navbar = document.querySelector(".navbar");
 const body = document.body;
 
 const setMenuState = (isOpen) => {
+    if (!navbar || !menuBtn) return;
     navbar.classList.toggle("active", isOpen);
     body.classList.toggle("menu-open", isOpen);
+    menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     menuBtn.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
 };
 
 if (menuBtn && navbar) {
+    if (!menuBtn.hasAttribute("aria-expanded")) {
+        menuBtn.setAttribute("aria-expanded", "false");
+    }
+
     menuBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         setMenuState(!navbar.classList.contains("active"));
