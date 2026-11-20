@@ -39,6 +39,7 @@ html {
 
 html {
   overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -48,6 +49,7 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
 
 }
@@ -218,10 +220,11 @@ HEADER
 
 .header {
 
-  position: sticky;
+  position: fixed;
 
   top: 0;
   left: 0;
+  right: 0;
 
   width: 100%;
 
@@ -246,8 +249,16 @@ HEADER
 .board-hero,
 .help-hero,
 .contact-hero {
-  margin-top: -90px !important;
-  padding-top: 140px !important;
+  margin-top: 0 !important;
+  padding-top: 150px !important;
+}
+
+.hero {
+  padding-top: 180px !important;
+}
+
+.board-hero {
+  padding-top: 180px !important;
 }
 
 .header.scrolled {
@@ -485,27 +496,19 @@ HERO
 
 .hero-right {
   position: relative;
-  margin-top: -380px;
-  /* Negative margin ni konchem reduce chesa so image kinda ki jaruguthundi */
   width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
 }
 
 .hero-right img {
   width: 100%;
-  max-width: 950px;
-  /* Width ni inka gattiga penchanu (950px) */
+  max-width: 100%;
   height: auto;
-  border-radius: 30px;
+  display: block;
+  border-radius: 28px;
   box-shadow: var(--shadow-xl);
-  /* Shadow ni inka rich ga pettanu */
-  transform: scale(1.1);
-  /* Scale tho image ni overall ga 10% peddaga chesthundi */
-  transform-origin: center;
-  transition: .5s;
-}
-
-.hero-right img:hover {
-  transform: translateY(-10px) scale(1.13);
+  transition: transform .5s, box-shadow .5s;
 }
 
 /*==================================================
@@ -942,77 +945,375 @@ LEARNING ENVIRONMENT
 .gallery {
 
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
-  grid-auto-rows: 260px;
-
-  gap: 22px;
+  gap: 20px;
 
 }
 
 .gallery-item {
 
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  box-shadow: var(--shadow-sm);
-
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  background-color: #E8EDF5;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  min-height: 290px;
 
 }
 
-.gallery-item.large {
+.gallery-item:focus-visible {
 
-  grid-row: span 2;
-
-}
-
-.gallery-item.wide {
-
-  grid-column: span 2;
+  outline: 3px solid #0A2348;
+  outline-offset: 3px;
 
 }
 
+/* Desktop Bento Arrangement (>= 768px) */
+@media (min-width: 768px) {
+
+  .gallery-item:nth-child(1),
+  .gallery-item.large {
+    grid-column: span 2;
+    min-height: 320px;
+  }
+
+  .gallery-item:nth-child(2) {
+    grid-column: span 1;
+    min-height: 320px;
+  }
+
+  .gallery-item:nth-child(3),
+  .gallery-item:nth-child(4),
+  .gallery-item:nth-child(5) {
+    grid-column: span 1;
+    min-height: 290px;
+  }
+
+  .gallery-item:nth-child(6),
+  .gallery-item.wide {
+    grid-column: span 3;
+    min-height: 310px;
+  }
+
+}
+
+/* Face-Safe Image Cropping */
 .gallery-item img {
 
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  transition: .6s;
-
-}
-
-.gallery-item:hover img {
-
-  transform: scale(1.08);
+  object-position: center 20%;
+  display: block;
+  transition: transform 0.35s ease;
 
 }
 
-.gallery-item::after {
+@media (hover: hover) and (pointer: fine) {
 
-  content: "";
+  .gallery-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .gallery-item:hover {
+    box-shadow: 0 12px 28px rgba(10, 35, 72, 0.12);
+  }
+
+}
+
+/* Card Styling & Micro-Captions */
+.gallery-overlay {
 
   position: absolute;
-
   inset: 0;
-
-  background: linear-gradient(180deg,
-      transparent,
-      rgba(0, 0, 0, .18));
-
-  opacity: 0;
-
-  transition: .35s;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px 20px;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.72) 0%, transparent 60%);
+  pointer-events: none;
+  border-radius: 16px;
+  transition: background 0.35s ease;
 
 }
 
-.gallery-item:hover::after {
+.gallery-item:hover .gallery-overlay {
+
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.82) 0%, transparent 65%);
+
+}
+
+.gallery-caption {
+
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+
+}
+
+/* Mobile Responsive Bento Grid (< 768px) */
+@media (max-width: 767px) {
+
+  .gallery {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+    grid-auto-rows: auto !important;
+  }
+
+  .gallery-item {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: unset !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* 1-top landscape hero card with aspect-ratio: 16 / 10 */
+  .gallery-item:first-child,
+  .gallery-item.large {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  /* 2 equal square cards below (child 2 & 3) naturally follow 2-column grid with aspect-ratio: 1 / 1 */
+  /* Remaining cards (child 4 & 5) follow 2-column grid with aspect-ratio: 1 / 1 */
+  /* Final card (child 6 / .gallery-item.wide) spans full width with aspect-ratio: 16 / 10 */
+  .gallery-item:last-child,
+  .gallery-item.wide {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .gallery-overlay {
+    padding: 12px 14px !important;
+  }
+
+  .gallery-caption {
+    font-size: 0.88rem !important;
+    line-height: 1.25 !important;
+  }
+
+}
+
+/*==================================================
+GALLERY LIGHTBOX MODAL
+==================================================*/
+
+.lightbox-modal {
+
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+.lightbox-modal.active {
 
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+}
+
+.lightbox-backdrop {
+
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 23, 42, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+
+}
+
+.lightbox-dialog {
+
+  position: relative;
+  z-index: 2;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.94);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+}
+
+.lightbox-modal.active .lightbox-dialog {
+
+  transform: scale(1);
+
+}
+
+.lightbox-close {
+
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 26px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  z-index: 5;
+
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+
+  background: #ffffff;
+  color: #0A2348;
+  transform: scale(1.08);
+  outline: none;
+
+}
+
+.lightbox-nav {
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  z-index: 6;
+
+}
+
+.lightbox-prev {
+
+  left: -58px;
+
+}
+
+.lightbox-next {
+
+  right: -58px;
+
+}
+
+.lightbox-nav:hover,
+.lightbox-nav:focus-visible {
+
+  background: #ffffff;
+  color: #0A2348;
+  transform: translateY(-50%) scale(1.08);
+  outline: none;
+
+}
+
+.lightbox-figure {
+
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+
+}
+
+.lightbox-img {
+
+  max-width: 100%;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+  background: #000;
+
+}
+
+.lightbox-caption {
+
+  margin-top: 14px;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  padding: 0 10px;
+
+}
+
+body.lightbox-open {
+
+  overflow: hidden !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .lightbox-modal {
+    padding: 16px;
+  }
+
+  .lightbox-prev {
+    left: 8px;
+    background: rgba(10, 23, 42, 0.65);
+  }
+
+  .lightbox-next {
+    right: 8px;
+    background: rgba(10, 23, 42, 0.65);
+  }
+
+  .lightbox-close {
+    top: -44px;
+    right: 0;
+  }
+
+  .lightbox-img {
+    max-height: 68vh;
+  }
+
+  .lightbox-caption {
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
 
 }
 
@@ -1558,18 +1859,15 @@ RESPONSIVE
 
   }
 
-  .gallery {
-
-    grid-template-columns: repeat(2, 1fr) !important;
-
-  }
-
 }
 
 @media (max-width: 1024px) {
   .header {
-    position: sticky !important;
+    position: fixed !important;
     top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
     z-index: 1100 !important;
   }
 
@@ -1585,7 +1883,7 @@ RESPONSIVE
   .board-hero,
   .help-hero,
   .contact-hero {
-    margin-top: -76px !important;
+    margin-top: 0 !important;
     padding-top: 116px !important;
   }
 
@@ -1764,7 +2062,6 @@ RESPONSIVE
 
   .program-grid,
   .why-grid,
-  .gallery,
   .testimonial-grid,
   .steps {
 
@@ -2543,16 +2840,212 @@ main {
   /* Ensures it stays properly layered above or alongside the header background */
 }
 
-/* Desktop / Larger Screens kosam unna Media Query lo idi pettandi */
-@media (min-width: 992px) {
+/*==========================================
+Scroll To Top Button
+==========================================*/
+.scroll-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary, #0A2348);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(10, 35, 72, 0.22);
+  transition: opacity .3s ease, transform .3s ease, visibility .3s ease, background-color .2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top:hover {
+  background: var(--accent, #F58220);
+  transform: translateY(-3px);
+}
+
+/*==========================================
+Responsive Hero & Credential Strip Adjustments
+==========================================*/
+
+/* Desktop (2-column hero layout >= 1101px) */
+@media (min-width: 1101px) {
   .hero-right {
+    margin-top: -380px !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
 
   .hero-right img {
     max-width: 850px !important;
-    /* Desktop lo image size inka peddaga kanipinchedaniki idi penchandi */
     width: 100% !important;
     height: auto !important;
+    border-radius: 30px !important;
+    box-shadow: var(--shadow-xl) !important;
+    transform: scale(1.1) !important;
+    transform-origin: center !important;
+  }
+
+  .hero-right img:hover {
+    transform: translateY(-10px) scale(1.13) !important;
+  }
+}
+
+/* Tablet / Medium Screens (<= 1100px) */
+@media (max-width: 1100px) {
+  .hero-right {
+    margin-top: 32px !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    max-width: 720px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: hidden !important;
+    border-radius: 24px !important;
+  }
+
+  .hero-right img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 24px !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 140px !important;
+    padding-bottom: 54px !important;
+  }
+
+  .hero-content {
+    gap: 24px !important;
+  }
+
+  .hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 24px auto 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-stats div {
+    background: #fff !important;
+    padding: 16px 12px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(10, 35, 72, 0.06) !important;
+    text-align: center !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: unset !important;
+  }
+
+  .hero-stats h3 {
+    font-size: 20px !important;
+    color: var(--primary) !important;
+    margin-bottom: 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-stats p {
+    font-size: 13px !important;
+    color: var(--text-light) !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+  }
+
+  .hero-right {
+    margin-top: 28px !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 28px rgba(10, 35, 72, 0.12) !important;
+  }
+
+  .hero-right img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 20px !important;
+    transform: none !important;
+    box-shadow: none !important;
+    display: block !important;
+    animation: none !important;
+  }
+
+  .credential-strip {
+    padding: 24px 0 28px !important;
+  }
+
+  .credential-strip .container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 0 24px !important;
+  }
+
+  .credential-strip .container > div {
+    width: 100% !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+    color: #0A2348 !important;
+  }
+
+  .credential-strip strong {
+    font-size: 20px !important;
+  }
+
+  .scroll-top {
+    right: 16px;
+    bottom: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    box-shadow: 0 4px 16px rgba(10, 35, 72, 0.25);
+  }
+}
+
+/* Small Mobile Screens (<= 400px) */
+@media (max-width: 400px) {
+  .hero-stats {
+    gap: 8px !important;
+  }
+
+  .hero-stats div {
+    padding: 14px 8px !important;
+  }
+
+  .hero-stats h3 {
+    font-size: 18px !important;
+  }
+
+  .hero-stats p {
+    font-size: 12px !important;
   }
 }

@@ -64,54 +64,25 @@ Scroll To Top Button
 ==========================================*/
 
 const scrollBtn = document.createElement("button");
-
 scrollBtn.innerHTML = "↑";
-
 scrollBtn.className = "scroll-top";
-
+scrollBtn.type = "button";
+scrollBtn.setAttribute("aria-label", "Scroll to top of page");
 document.body.appendChild(scrollBtn);
 
-scrollBtn.style.cssText = `
-position:fixed;
-right:25px;
-bottom:25px;
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:#0A2348;
-color:#fff;
-font-size:22px;
-cursor:pointer;
-display:none;
-z-index:999;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:.3s;
-`;
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 600) {
+    scrollBtn.classList.add("is-visible");
+  } else {
+    scrollBtn.classList.remove("is-visible");
+  }
+}, { passive: true });
 
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY>400){
-
-scrollBtn.style.display="block";
-
-}else{
-
-scrollBtn.style.display="none";
-
-}
-
-});
-
-scrollBtn.addEventListener("click",()=>{
-
-window.scrollTo({
-
-top:0,
-behavior:"smooth"
-
-});
-
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 });
 
 /*==========================================
@@ -225,6 +196,9 @@ End
     initButtonRipples();
     initBackToTop();
     initNewsletterForm();
+    initGalleryLightbox();
+    initContactCopyActions();
+    initLiveStatusIndicator();
   }
 
   /* ---------------------------------------------------------------- */
@@ -480,6 +454,225 @@ End
       note.style.color = "var(--primary-green-light)";
       form.reset();
     });
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Gallery Lightbox Modal                                            */
+  /* ---------------------------------------------------------------- */
+  function initGalleryLightbox() {
+    var lightbox = document.getElementById("gallery-lightbox");
+    var galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
+    if (!lightbox || !galleryItems.length) return;
+
+    var backdrop = lightbox.querySelector(".lightbox-backdrop");
+    var closeBtn = lightbox.querySelector(".lightbox-close");
+    var prevBtn = lightbox.querySelector(".lightbox-prev");
+    var nextBtn = lightbox.querySelector(".lightbox-next");
+    var lightboxImg = lightbox.querySelector(".lightbox-img");
+    var lightboxCaption = lightbox.querySelector(".lightbox-caption");
+    var currentIndex = -1;
+    var lastActiveTrigger = null;
+
+    function showImage(index) {
+      if (index < 0) index = galleryItems.length - 1;
+      if (index >= galleryItems.length) index = 0;
+      currentIndex = index;
+
+      var item = galleryItems[currentIndex];
+      var img = item.querySelector("img");
+      var caption = item.querySelector(".gallery-caption");
+      if (!img) return;
+
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || (caption ? caption.textContent.trim() : "Full View Photo");
+      if (lightboxCaption) {
+        lightboxCaption.textContent = caption ? caption.textContent.trim() : "";
+      }
+    }
+
+    function openLightbox(index) {
+      lastActiveTrigger = galleryItems[index];
+      showImage(index);
+      lightbox.classList.add("active");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("lightbox-open");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox.classList.contains("active")) return;
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("lightbox-open");
+      if (lightboxImg) lightboxImg.src = "";
+      if (lastActiveTrigger) {
+        lastActiveTrigger.focus();
+        lastActiveTrigger = null;
+      }
+    }
+
+    function prevImage() {
+      showImage(currentIndex - 1);
+    }
+
+    function nextImage() {
+      showImage(currentIndex + 1);
+    }
+
+    galleryItems.forEach(function (item, index) {
+      item.addEventListener("click", function () {
+        openLightbox(index);
+      });
+      item.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(index);
+        }
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        closeLightbox();
+      });
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener("click", closeLightbox);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        prevImage();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        nextImage();
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("active")) return;
+      if (e.key === "Escape") {
+        closeLightbox();
+      } else if (e.key === "ArrowLeft") {
+        prevImage();
+      } else if (e.key === "ArrowRight") {
+        nextImage();
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Contact Card One-Click Copy Actions                              */
+  /* ---------------------------------------------------------------- */
+  function initContactCopyActions() {
+    var copyButtons = document.querySelectorAll(".copy-btn");
+    var announcer = document.getElementById("copy-announcement");
+    if (!copyButtons.length) return;
+
+    copyButtons.forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var textToCopy = btn.getAttribute("data-copy");
+        if (!textToCopy) return;
+
+        var originalHTML = btn.innerHTML;
+
+        function setSuccess() {
+          btn.classList.add("copied");
+          btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> <span class="btn-text">Copied!</span>';
+          if (announcer) {
+            announcer.textContent = "Copied " + textToCopy + " to clipboard";
+          }
+          setTimeout(function () {
+            btn.classList.remove("copied");
+            btn.innerHTML = originalHTML;
+          }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(setSuccess).catch(function () {
+            fallbackCopy(textToCopy, setSuccess);
+          });
+        } else {
+          fallbackCopy(textToCopy, setSuccess);
+        }
+      });
+    });
+
+    function fallbackCopy(text, callback) {
+      var tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      tempInput.style.position = "fixed";
+      tempInput.style.opacity = "0";
+      document.body.appendChild(tempInput);
+      tempInput.focus();
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        callback();
+      } catch (err) {
+        console.warn("Unable to copy to clipboard", err);
+      }
+      document.body.removeChild(tempInput);
+    }
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Real-time Raleigh ET Live Open/Closed Status Indicator           */
+  /* ---------------------------------------------------------------- */
+  function initLiveStatusIndicator() {
+    var pill = document.getElementById("center-live-status");
+    if (!pill) return;
+
+    function updateStatus() {
+      try {
+        var now = new Date();
+        var raleighStr = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+        var raleighDate = new Date(raleighStr);
+        var day = raleighDate.getDay(); // 0 is Sun, 6 is Sat
+        var hour = raleighDate.getHours();
+        var mins = raleighDate.getMinutes();
+        var timeVal = hour + mins / 60;
+
+        // Open Mon–Fri, 7:00 AM to 6:00 PM (7.0 <= timeVal < 18.0)
+        var isOpen = day >= 1 && day <= 5 && timeVal >= 7.0 && timeVal < 18.0;
+        var statusText = pill.querySelector(".status-text");
+
+        if (!statusText) return;
+
+        if (isOpen) {
+          pill.classList.remove("closed");
+          pill.classList.add("open");
+          statusText.innerHTML = "Open Now &bull; Closes 6:00 PM";
+        } else {
+          pill.classList.remove("open");
+          pill.classList.add("closed");
+          if (day === 5 && timeVal >= 18.0) {
+            statusText.innerHTML = "Closed &bull; Opens Mon 7:00 AM";
+          } else if (day === 6) {
+            statusText.innerHTML = "Closed &bull; Opens Mon 7:00 AM";
+          } else if (day === 0) {
+            statusText.innerHTML = "Closed &bull; Opens Tomorrow 7:00 AM";
+          } else if (timeVal < 7.0) {
+            statusText.innerHTML = "Closed &bull; Opens Today 7:00 AM";
+          } else {
+            statusText.innerHTML = "Closed &bull; Opens Tomorrow 7:00 AM";
+          }
+        }
+      } catch (e) {
+        // Fallback default in HTML is already graceful
+      }
+    }
+
+    updateStatus();
+    setInterval(updateStatus, 60000);
   }
 
 })();

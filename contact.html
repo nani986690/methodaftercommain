@@ -140,148 +140,181 @@ HERO
 CONTACT INFO
 =============================-->
 
-  <section class="contact-info">
+  <section class="contact-info" id="contact-info">
 
     <div class="container">
 
       <div class="section-heading">
 
         <span>
-
           CONTACT INFORMATION
-
         </span>
 
         <h2>
-
           Let's Connect
-
         </h2>
 
         <p>
-
-          Reach out using the information below or send us a message using
-          our contact form.
-
+          We're here to answer questions, share enrollment details, and welcome your family.
+          Reach out directly or send us a message below.
         </p>
 
       </div>
 
       <div class="contact-grid">
 
-        <!-- Address -->
+        <!-- Card 1: Address -->
+        <article class="contact-card contact-card-visit">
 
-        <div class="contact-card">
-
-          <div class="contact-icon">
-
-            <i class="fa-solid fa-location-dot"></i>
-
+          <div class="contact-card-top">
+            <div class="contact-icon" aria-hidden="true">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <span class="contact-tag">Serving Raleigh Since 1969</span>
+            <h3>Visit Us</h3>
+            <address class="contact-detail">
+              <span class="contact-address">
+                <span class="facility-name">Method Child Development Center</span>
+                <span class="street-line">900 Trailwood Drive</span>
+                <span class="city-line">Raleigh, NC 27606</span>
+              </span>
+            </address>
           </div>
 
-          <h3>
-
-            Visit Us
-
-          </h3>
-
-          <p>
-
-            Method Child Development Center<br>
-
-            900 Trailwood Drive<br>
-
-            Raleigh, NC 27606
-
-          </p>
-
-        </div>
-
-        <!-- Phone -->
-
-        <div class="contact-card">
-
-          <div class="contact-icon">
-
-            <i class="fa-solid fa-phone-volume"></i>
-
+          <div class="contact-card-actions">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=900+Trailwood+Drive+Raleigh+NC+27606"
+              target="_blank" rel="noopener" class="contact-btn contact-btn-primary"
+              aria-label="Get directions to 900 Trailwood Drive on Google Maps (opens in new tab)">
+              <i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i>
+              <span>Get Directions</span>
+            </a>
+            <button type="button" class="contact-btn contact-btn-secondary copy-btn"
+              data-copy="900 Trailwood Drive, Raleigh, NC 27606"
+              aria-label="Copy street address to clipboard">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i>
+              <span class="btn-text">Copy Address</span>
+            </button>
+            <a href="#map-section" class="contact-link-jump" aria-label="Jump to map on this page">
+              <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> View on page map &darr;
+            </a>
           </div>
 
-          <h3>
+        </article>
 
-            Call Us
+        <!-- Card 2: Phone -->
+        <article class="contact-card contact-card-phone">
 
-          </h3>
-
-          <p>
-
-            (919) 852-4568
-
-          </p>
-
-          <p>
-
-            Monday – Friday
-
-          </p>
-
-        </div>
-
-        <!-- Email -->
-
-        <div class="contact-card">
-
-          <div class="contact-icon">
-
-            <i class="fa-solid fa-envelope"></i>
-
+          <div class="contact-card-top">
+            <div class="contact-icon" aria-hidden="true">
+              <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <span class="contact-tag live-status-pill" id="center-live-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="status-text">Open Mon&ndash;Fri &bull; 7:00 AM &ndash; 6:00 PM</span>
+            </span>
+            <h3>Call Us</h3>
+            <div class="contact-detail">
+              <a href="tel:9198524568" class="contact-highlight-link" aria-label="Call Method Child Development Center at 919-852-4568">
+                (919) 852-4568
+              </a>
+              <p class="contact-subtext">Direct line to Center Director &amp; Admissions</p>
+            </div>
           </div>
 
-          <h3>
-
-            Email Us
-
-          </h3>
-
-          <p>
-
-            method.director@methodchilddevelopmentcenter.com
-
-          </p>
-
-        </div>
-
-        <!-- Hours -->
-
-        <div class="contact-card">
-
-          <div class="contact-icon">
-
-            <i class="fa-solid fa-clock"></i>
-
+          <div class="contact-card-actions">
+            <a href="tel:9198524568" class="contact-btn contact-btn-primary"
+              aria-label="Call (919) 852-4568 now">
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              <span>Call Now</span>
+            </a>
+            <button type="button" class="contact-btn contact-btn-secondary copy-btn"
+              data-copy="(919) 852-4568"
+              aria-label="Copy phone number to clipboard">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i>
+              <span class="btn-text">Copy Phone</span>
+            </button>
           </div>
 
-          <h3>
+        </article>
 
-            Working Hours
+        <!-- Card 3: Email -->
+        <article class="contact-card contact-card-email">
 
-          </h3>
+          <div class="contact-card-top">
+            <div class="contact-icon" aria-hidden="true">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <span class="contact-tag">Inquiries &amp; Tours</span>
+            <h3>Email Us</h3>
+            <div class="contact-detail">
+              <a href="mailto:method.director@methodchilddevelopmentcenter.com" class="contact-highlight-link email-link"
+                aria-label="Send email to method.director@methodchilddevelopmentcenter.com">
+                method.director@methodchilddevelopmentcenter.com
+              </a>
+              <p class="contact-subtext">We reply within one business day</p>
+            </div>
+          </div>
 
-          <p>
+          <div class="contact-card-actions">
+            <a href="mailto:method.director@methodchilddevelopmentcenter.com" class="contact-btn contact-btn-primary"
+              aria-label="Send email to Center Director">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              <span>Send Email</span>
+            </a>
+            <button type="button" class="contact-btn contact-btn-secondary copy-btn"
+              data-copy="method.director@methodchilddevelopmentcenter.com"
+              aria-label="Copy email address to clipboard">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i>
+              <span class="btn-text">Copy Email</span>
+            </button>
+          </div>
 
-            Monday – Friday
+        </article>
 
-          </p>
+        <!-- Card 4: Hours -->
+        <article class="contact-card contact-card-hours">
 
-          <p>
+          <div class="contact-card-top">
+            <div class="contact-icon" aria-hidden="true">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <span class="contact-tag">Year-Round Care</span>
+            <h3>Working Hours</h3>
+            <div class="contact-detail">
+              <div class="schedule-table">
+                <div class="schedule-row">
+                  <span class="schedule-day">Mon &ndash; Fri:</span>
+                  <span class="schedule-time">7:00 AM &ndash; 6:00 PM</span>
+                </div>
+                <div class="schedule-row closed">
+                  <span class="schedule-day">Sat &ndash; Sun:</span>
+                  <span class="schedule-time">Closed</span>
+                </div>
+              </div>
+              <p class="contact-subtext">Full-day early childhood education</p>
+            </div>
+          </div>
 
-            7:00 AM – 6:00 PM
+          <div class="contact-card-actions">
+            <a href="#contact-form" class="contact-btn contact-btn-primary"
+              aria-label="Jump to Send us a message contact form">
+              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+              <span>Schedule Tour</span>
+            </a>
+            <button type="button" class="contact-btn contact-btn-secondary copy-btn"
+              data-copy="Monday – Friday: 7:00 AM – 6:00 PM"
+              aria-label="Copy operating hours to clipboard">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i>
+              <span class="btn-text">Copy Hours</span>
+            </button>
+          </div>
 
-          </p>
-
-        </div>
+        </article>
 
       </div>
+
+      <!-- Accessible live region for copy confirmation -->
+      <div id="copy-announcement" class="sr-only" aria-live="polite"></div>
 
     </div>
 
@@ -408,7 +441,7 @@ MAP & CONTACT FORM
 GOOGLE MAP
 =============================-->
 
-        <div class="contact-map">
+        <div class="contact-map" id="map-section">
 
           <div class="map-header">
 
